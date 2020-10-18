@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import SampleImage from '../assets/images/ak.jpg'
+import dayjs from 'dayjs'
 
 export type ContentProps = {
   title: string
@@ -25,6 +26,7 @@ const ListItem: React.FC<ContentProps> = ({
           {title}
         </Text>
         <Text style={styles.subText}>{author}</Text>
+        <Text style={styles.subText}>{ dayjs(publishedAt).format('L LT') }</Text>
       </View>
     </View>
   )

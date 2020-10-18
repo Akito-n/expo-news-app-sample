@@ -1,0 +1,5 @@
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+dayjs.extend(localizedFormat)
+import 'dayjs/locale/ja'
+dayjs.locale('ja')

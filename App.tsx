@@ -5,6 +5,7 @@ import ListItem, { ContentProps } from './components/ListItem'
 import ListItemData from './dummy/listItemData'
 import {env} from './config/env'
 import axios from 'axios'
+import './config/dayjs'
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${env.newsApi}`
 
