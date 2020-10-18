@@ -1,10 +1,17 @@
 import React from 'react'
-import { StyleSheet, View, FlatList, SafeAreaView } from 'react-native'
+import { StyleSheet, View, Text, FlatList, SafeAreaView } from 'react-native'
+import { useRoute, RouteProp } from '@react-navigation/native'
+import {StackParamList} from '../navigation/AppNavigator'
 
-const ArticleScreen = () => {
+const ArticleScreen: React.FC = () => {
+
+  const route = useRoute<RouteProp<StackParamList, 'Article'>>()
+
   return (
     <SafeAreaView>
-      <View>新しいスクリーン</View>
+      <View>
+        <Text>{route.params.title}</Text>
+      </View>
     </SafeAreaView>
   )
 }
