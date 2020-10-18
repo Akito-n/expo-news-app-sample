@@ -8,6 +8,7 @@ const ArticleScreen: React.FC = () => {
 
   const route = useRoute<RouteProp<StackParamList, 'Article'>>()
   const article = route.params.article
+  // newsapiにurlがない可能性を考慮している
   const url = article.url ?? 'https://www.google.com/'
 
   return (
