@@ -3,11 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import ArticleScreen from '../screens/ArticleScreen';
+import { ArticleProp } from '../components/ListItem';
 
 const Stack = createStackNavigator();
 
 export type StackParamList = {
-  Article: {title: string}
+  Article: {article: ArticleProp}
 }
 
 const AppNavigator = () => {

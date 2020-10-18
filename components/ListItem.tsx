@@ -1,37 +1,37 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, GestureResponderEvent } from 'react-native'
 import SampleImage from '../assets/images/ak.jpg'
 import dayjs from 'dayjs'
 import { useNavigation } from '@react-navigation/native'
 
-export type ContentProps = {
+export type ArticleProp = {
   title: string
   author: string
   urlToImage: string
   publishedAt: string
 }
 
+export type ContentProps = {
+  item: ArticleProp
+  moveToArticleDetail: (item: ArticleProp) => void
+}
+
 const ListItem: React.FC<ContentProps> = ({
-  title,
-  urlToImage,
-  author,
-  publishedAt
+  item,
+  moveToArticleDetail
 }) => {
-  const {navigate} = useNavigation()
   return (
-    <TouchableOpacity onPress={() => {
-      navigate(`Article`, {title: title})
-    }}>
+    <TouchableOpacity onPress={() => { moveToArticleDetail(item)}}>
       <View style={styles.itemContainer}>
         <View style={styles.leftContainer}>
-        { !!urlToImage && <Image source={{ uri: urlToImage }} style={styles.image} />}
+        { !!item.urlToImage && <Image source={{ uri: item.urlToImage }} style={styles.image} />}
         </View>
         <View style={styles.rightContainer}>
           <Text numberOfLines={3} style={styles.text}>
-            {title}
+            {item.title}
           </Text>
-          <Text style={styles.subText}>{author}</Text>
-          <Text style={styles.subText}>{ dayjs(publishedAt).format('L LT') }</Text>
+          <Text style={styles.subText}>{item.author}</Text>
+          <Text style={styles.subText}>{ dayjs(item.publishedAt).format('L LT') }</Text>
         </View>
       </View>
     </TouchableOpacity>

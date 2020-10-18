@@ -1,16 +1,18 @@
 import { StatusBar } from 'expo-status-bar'
 import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, FlatList, SafeAreaView } from 'react-native'
-import ListItem, { ContentProps } from '../components/ListItem'
+import ListItem, { ContentProps, ArticleProp } from '../components/ListItem'
 import ListItemData from '../dummy/listItemData'
 import {env} from '../config/env'
 import axios from 'axios'
+import { useNavigation } from '@react-navigation/native'
 import '../config/dayjs'
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${env.newsApi}`
 
-const HomeScreen = () => {
-  const [articles, setArticles ] = useState<ContentProps[]>(ListItemData)
+const HomeScreen: React.FC = () => {
+  const [articles, setArticles ] = useState<ArticleProp[]>(ListItemData)
+  const { navigate } = useNavigation()
   useEffect(() => {
   fetchArticles()
 
@@ -24,6 +26,10 @@ const HomeScreen = () => {
       console.log(e)
     }
   }
+
+  const moveToArticleDetail = (item: ArticleProp ) => {
+    navigate(`Article`, {article: item})
+  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -31,10 +37,10 @@ const HomeScreen = () => {
         data={articles}
         renderItem={({ item }) => (
           <ListItem
-            title={item.title}
-            urlToImage={item.urlToImage}
-            author={item.author}
-            publishedAt={item.publishedAt}
+            item={item}
+            moveToArticleDetail={(item) => {
+              navigate(`Article`, {article: item})
+            }}
           />
         )}
         keyExtractor={(_, index) => index.toString()}
