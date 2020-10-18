@@ -9,6 +9,7 @@ export type ArticleProp = {
   author: string
   urlToImage: string
   publishedAt: string
+  url?: string
 }
 
 export type ContentProps = {

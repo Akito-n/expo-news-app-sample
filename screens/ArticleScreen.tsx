@@ -1,21 +1,22 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, SafeAreaView } from 'react-native'
+import { StyleSheet, View, Text, Image, SafeAreaView} from 'react-native'
 import { useRoute, RouteProp } from '@react-navigation/native'
 import {StackParamList} from '../navigation/AppNavigator'
+import { WebView } from 'react-native-webview'
 
 const ArticleScreen: React.FC = () => {
 
   const route = useRoute<RouteProp<StackParamList, 'Article'>>()
   const article = route.params.article
+  const url = article.url ?? 'https://www.google.com/'
 
   return (
-    <SafeAreaView>
-      <View>
-        <Image source={{ uri: article.urlToImage }} style={styles.image} />
-        <Text>{article.title}</Text>
-        <Text>{article.author}</Text>
-        <Text>{article.publishedAt}</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <WebView
+        source={{
+          uri: url
+        }}
+      />
     </SafeAreaView>
   )
 }
