@@ -9,7 +9,7 @@ import './config/dayjs'
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${env.newsApi}`
 
-export default function App() {
+const App = () => {
   const [articles, setArticles ] = useState<ContentProps[]>(ListItemData)
   useEffect(() => {
   fetchArticles()
@@ -49,3 +49,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   }
 })
+
+export default App
