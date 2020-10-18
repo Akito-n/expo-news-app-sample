@@ -18,7 +18,7 @@ const ListItem: React.FC<ContentProps> = ({
   return (
     <View style={styles.itemContainer}>
       <View style={styles.leftContainer}>
-        <Image source={{ uri: urlToImage }} style={styles.image} />
+      { !!urlToImage && <Image source={{ uri: urlToImage }} style={styles.image} />}
       </View>
       <View style={styles.rightContainer}>
         <Text numberOfLines={3} style={styles.text}>
