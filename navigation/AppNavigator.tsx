@@ -7,7 +7,7 @@ import ClipScreen from '../screens/ClipScreen';
 import { ArticleProp } from '../components/ListItem'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesome } from '@expo/vector-icons'
-import { color } from 'react-native-reanimated'
+
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -25,6 +25,7 @@ const ClipStack = () => {
   return(
     <Stack.Navigator>
       <Stack.Screen name="Clip" component={ClipScreen} options={{ headerShown: false}}/>
+      <Stack.Screen name="Article" component={ArticleScreen} options={{ headerShown: false}}/>
     </Stack.Navigator>
   )
 }

@@ -3,12 +3,27 @@ import { StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native'
 import { useRoute, RouteProp } from '@react-navigation/native'
 import {StackParamList} from '../navigation/AppNavigator'
 import { WebView } from 'react-native-webview'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addClip, deleteClip } from '../store/actions/user'
+import ClipButton from '../components/clipButton';
 
 const ArticleScreen: React.FC = () => {
 
   const dispatch =  useDispatch()
+  const user = useSelector((state) => state.user)
+  const clips = user.clips
+
+  const isClipped = () => {
+    return clips.some(clip => clip.url === article.url)
+  }
+
+  const toggleClip = () => {
+    if(isClipped()){
+      dispatch(deleteClip({clip: article}))
+    } else {
+      dispatch(addClip({clip: article}))
+    }
+    }
 
   const route = useRoute<RouteProp<StackParamList, 'Article'>>()
   const article = route.params.article
@@ -17,8 +32,7 @@ const ArticleScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={ () => dispatch(addClip({clip: article}))}><Text style={{margin: 10, fontSize: 30}}>press add</Text></TouchableOpacity>
-      <TouchableOpacity onPress={ () => dispatch(deleteClip({clip: article}))}><Text style={{margin: 10, fontSize: 30}}>press delete</Text></TouchableOpacity>
+      <ClipButton onPress={toggleClip} enabled={isClipped()} />
       <WebView
         source={{
           uri: url
