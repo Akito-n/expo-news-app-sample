@@ -1,6 +1,6 @@
 import { ArticleProp } from '../../components/ListItem';
 
-const initialState = {
+const initialState: {clips: ArticleProp[]} = {
   clips: []
 }
 export type ReducerProps = {
