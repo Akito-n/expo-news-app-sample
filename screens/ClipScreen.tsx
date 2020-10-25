@@ -1,5 +1,8 @@
 import React from 'react'
-import { StyleSheet, SafeAreaView, Text } from 'react-native'
+import {useSelector} from 'react-redux'
+import { StyleSheet, SafeAreaView, Text, FlatList} from 'react-native'
+import ListItem, { ContentProps, ArticleProp } from '../components/ListItem'
+import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   container: {
@@ -8,10 +11,29 @@ const styles = StyleSheet.create({
   },
 })
 
-const ClipScreen = () => {
+const ClipScreen: React.FC = () => {
+
+  const { navigate } = useNavigation()
+  const user = useSelector((state) => state.user)
+  const {clips} = user
+  console.log(clips)
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Clip Screen</Text>
+      <FlatList
+      data={clips}
+      renderItem={({item}) => {
+        return (
+        <ListItem
+            item={item}
+            moveToArticleDetail={(item) => {
+              navigate(`Article`, {article: item})
+            }}
+          />
+        )
+      }}
+      keyExtractor={(_, index) => index.toString()}
+      >
+      </FlatList>
     </SafeAreaView>
   )
 }
